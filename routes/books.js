@@ -5,16 +5,14 @@ const booksRoute = express.Router();
 
 // Defining routes for the books
 
+//Get All Books. (This is a protected route)
+
 booksRoute.get('/', (req, res) => {
+  console.log("Authenticated User:", req.user); // Using this to debug the jwt auth.
   bookModel
     .find()
-    .then((books) => {
-      res.status(200).json(books);
-    })
-    .catch((err) => {
-      console.log(err);
-      res.send(err);
-    });
+    .then((books) =>  res.status(200).json(books))
+     .catch((err) => res.status(500).json({ error: err.message }));
 });
 
 // Get book byID

@@ -13,7 +13,7 @@ const customExtractor = (req) => {
   return req.query && req.query.secret_token ? req.query.secret_token : null;  // This is the custom extractor to pull the query from the token parameter
 };
 
-// This helps grabs jwt token , then check the url parameter if it has secret token
+// This helps grabs jwt token Strategy  , then check the url parameter if it has secret token
 
 passport.use(
   new Jwtstrategy(
@@ -73,7 +73,7 @@ passport.use(
         const validate = await user.isValidPassword(password);
 
         if (!validate) {
-          return done(null, false, { messsage: "Wrong Password" });
+          return done(null, false, { messsage: "Invalid Password" });
         }
 
         return done(null, user, { messsage: "Logged in successfully" });
@@ -84,4 +84,3 @@ passport.use(
   )
 );
 
-// module.exports = passport;
